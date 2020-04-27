@@ -1,0 +1,56 @@
+<%-include('parts/header')%>
+<%-include('parts/navbar')%>
+
+<div class="container text-center">
+    
+    <h3>Create account</h3><br>
+    <form action="/signup" method="POST">
+        <input type="text" class="form-control" name="username" placeholder="User name"><br>
+            <%let usernameError = validationErrors.find(err=> err.param === 'username') %>
+            <% if(usernameError){ %>
+                <p class="alert alert-danger">
+                    <%=usernameError.msg%>
+                </p>
+            <%}%>    
+
+        <input type="email" class="form-control" name="email" placeholder="E-mail"><br>
+            <%let emailError = validationErrors.find(err=> err.param === 'email') %>
+            <% if(emailError){ %>
+                <p class="alert alert-danger">
+                    <%=emailError.msg%>
+                </p>
+            <%}%>
+
+        <input type="password" class="form-control" name="password" placeholder="password"><br>
+            <%let passwordError = validationErrors.find(err=> err.param === 'password') %>
+            <% if(passwordError){ %>
+                <p class="alert alert-danger">
+                    <%=passwordError.msg%>
+                </p>
+            <%}%>    
+
+        <input type="password" class="form-control" name="confirmPassword" placeholder="confirm password"><br>
+            <%let confirmPasswordError = validationErrors.find(err=> err.param === 'confirmPassword') %>
+            <% if(confirmPasswordError){ %>
+                <p class="alert alert-danger">
+                    <%=confirmPasswordError.msg%>
+                </p>
+            <%}%>    
+        <input type="submit" value="create account" class="btn btn-primary">
+    </form>
+    
+    <%if(authError){%>
+        <br>
+        <p class="alert alert-danger">
+            <%= authError %>
+        </p>    
+    <%}%>
+    
+    <br>
+    <div>
+        Already have account ? <a href = "/login">login</a>
+    </div>
+    <br><br><br>
+</div>
+
+<%-include('parts/footer')%>    
